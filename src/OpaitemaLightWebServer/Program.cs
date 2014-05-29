@@ -30,6 +30,7 @@ namespace OpaitemaLightWebServer
             var folder = string.Empty;
             int port = 9090;
             var debugRequest = false;
+            var defaultDocument = string.Empty;
 
             //Argumentos
             for (int i = 0; i < args.Length; i++)
@@ -53,18 +54,31 @@ namespace OpaitemaLightWebServer
                         throw new Exception("You must enter a number for the http port");
                 }
 
-                //Parameter: -d: debugRequest
-                if (param.IndexOf("-d:") > -1 || param.IndexOf("/d:") > -1)
+                //Parameter: -debug: debugRequest
+                if (param.IndexOf("-debug:") > -1 || param.IndexOf("/debug:") > -1)
                 {
-                    var debugRequestCadena = param.Substring(3, param.Length - 3);
+                    var debugRequestCadena = param.Substring(7, param.Length - 7);
                     if (!Boolean.TryParse(debugRequestCadena, out debugRequest))
                         throw new Exception("You must enter a Boolean value for debugRequest parameter");
+                }
+
+                //Parameter: -d: Default Document
+                if (param.IndexOf("-d:") > -1 || param.IndexOf("/d:") > -1)
+                {
+                    defaultDocument = param.Substring(3, param.Length - 3);
                 }
             }
 
             Config.Instance.RootDirectory = String.IsNullOrEmpty(folder)
                                                 ? Environment.CurrentDirectory
                                                 : folder;
+
+
+            Config.Instance.DefaultDocument = String.IsNullOrEmpty(defaultDocument)
+                                                ? "index.html"
+                                                : defaultDocument;
+
+            
 
             Config.Instance.Port = port;
             Config.Instance.DebugRequest = debugRequest;

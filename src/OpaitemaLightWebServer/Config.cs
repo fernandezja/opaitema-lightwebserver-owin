@@ -33,6 +33,11 @@ namespace OpaitemaLightWebServer
         public string RootDirectory { get; set; }
 
         /// <summary>
+        /// Default Document
+        /// </summary>
+        public string DefaultDocument { get; set; }
+
+        /// <summary>
         /// Http port
         /// </summary>
         public int Port { get; set; }
