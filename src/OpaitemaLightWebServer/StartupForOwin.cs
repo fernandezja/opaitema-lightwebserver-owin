@@ -35,40 +35,7 @@ namespace OpaitemaLightWebServer
                         Console.WriteLine("Request: {0}", path);
 
 
-                    //TODO: Basic ContentType ... should get a ContentType from scheme Helper. 
-                    switch (Path.GetExtension(filePath))
-                    {
-                        case ".htm":
-                        case ".html":
-                            context.Response.ContentType = "text/html";
-                            break;
-
-                        case ".css":
-                            context.Response.ContentType = "text/css";
-                            break;
-
-                         case ".js":
-                            context.Response.ContentType = "application/javascript";
-                            break;   
-
-                        case ".jpg":
-                        case ".jpeg":
-                            context.Response.ContentType = "image/jpeg";
-                            break;
-                        
-                        case ".png":
-                            context.Response.ContentType = "image/png";
-                            break;
-
-                        case ".json":
-                            context.Response.ContentType = "application/json";
-                            break;
-
-                        default:
-                            context.Response.ContentType = "application/octet-stream";
-                            break;
-
-                    }
+                   
 
                     var file = File.ReadAllBytes(filePath);
                     //context.Response.ContentType = "text/plain";
@@ -83,6 +50,8 @@ namespace OpaitemaLightWebServer
                     context.Response.StatusCode = 404;
                     return context.Response.WriteAsync("File not found");
                 }
+
+                context.Response.ContentType = Config.Instance.GetMimeFromExtension(Path.GetExtension(filePath));
 
 
                 //context.Response.ContentType = "text/plain";

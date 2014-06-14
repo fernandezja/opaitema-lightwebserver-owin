@@ -53,7 +53,66 @@ namespace OpaitemaLightWebServer
         /// View each item of the request in the query
         /// </summary>
         public bool DebugRequest { get; set; }
-        
+
+
+        public string GetMimeFromExtension(string extension) {
+
+            //TODO: Basic ContentType ... should get a ContentType from scheme Helper. 
+            var contentType = string.Empty;
+
+            switch (extension)
+            {
+                case ".htm":
+                case ".html":
+                    contentType = "text/html";
+                    break;
+
+                case ".css":
+                    contentType = "text/css";
+                    break;
+
+                case ".js":
+                    contentType = "application/javascript";
+                    break;
+
+                case ".jpg":
+                case ".jpeg":
+                    contentType = "image/jpeg";
+                    break;
+
+                case ".png":
+                    contentType = "image/png";
+                    break;
+
+                case ".mp4":
+                    contentType = "video/mp4";
+                    break;
+
+                case ".oga":
+                    contentType = "audio/ogg";
+                    break;
+
+                case ".ogv":
+                    contentType = "video/ogg";
+                    break;
+
+                case ".webm":
+                    contentType = "video/webm";
+                    break;
+
+                case ".json":
+                    contentType = "application/json";
+                    break;
+
+                default:
+                    contentType = "application/octet-stream";
+                    break;
+
+            }
+
+            return contentType;
+
+        }
         
     }
 }
