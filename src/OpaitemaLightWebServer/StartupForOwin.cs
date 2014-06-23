@@ -35,7 +35,7 @@ namespace OpaitemaLightWebServer
                         Console.WriteLine("Request: {0}", path);
 
 
-                   
+                    context.Response.ContentType = Config.Instance.GetMimeFromExtension(Path.GetExtension(filePath));
 
                     var file = File.ReadAllBytes(filePath);
                     //context.Response.ContentType = "text/plain";
@@ -51,7 +51,7 @@ namespace OpaitemaLightWebServer
                     return context.Response.WriteAsync("File not found");
                 }
 
-                context.Response.ContentType = Config.Instance.GetMimeFromExtension(Path.GetExtension(filePath));
+                
 
 
                 //context.Response.ContentType = "text/plain";
